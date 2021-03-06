@@ -23,7 +23,10 @@
         >
           <div class="flex flex-row">
             <div
-              :class="['chit', `bg-${getTagDetails(change.tag).color} text-white self-start text-sm font-semibold p-1 rounded`]"
+              class="chit text-white self-start text-sm font-semibold p-1 rounded"
+              :style="{
+                backgroundColor: getTagDetails(change.tag).color
+              }"
             >
               {{ getTagDetails(change.tag).name }}
             </div>
@@ -67,23 +70,23 @@ export default {
       tagDetails: {
         [tags.FEATURE]: {
           name: "FEATURE",
-          color: "blue-500"
+          color: "#3B82F6"
         },
         [tags.BUG_FIX]: {
           name: "FIX",
-          color: "purple-500"
+          color: "#A855F7"
         },
         [tags.PERFORMANCE]: {
           name: "PERF",
-          color: "green-500"
+          color: "#22C55E"
         },
         [tags.CHORE]: {
           name: "CHORE",
-          color: "gray-600"
+          color: "#6B7280"
         },
         [tags.NEW]: {
           name: "NEW",
-          color: "yellow-500"
+          color: "#F59E0B"
         }
       }
     };
@@ -117,6 +120,25 @@ export default {
         grid-template-columns: 1fr;
         .chit {
           margin-bottom: 10px;
+
+          &.blue {
+            @apply bg-blue-500;
+          }
+          &.purple {
+            @apply bg-purple-500;
+          }
+
+          &.green {
+            @apply bg-green-500;
+          }
+
+          &.gray {
+            @apply bg-gray-500;
+          }
+
+          &.yellow {
+            @apply bg-yellow-500;
+          }
         }
       }
     }
