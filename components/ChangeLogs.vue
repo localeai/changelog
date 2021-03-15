@@ -99,7 +99,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~/assets/global/mixins";
 
 .change-logs-list {
@@ -107,6 +107,35 @@ export default {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px 15px;
+
+  .nuxt-content {
+    a {
+      @apply text-blue-500;
+    }
+
+    h1 {
+      @apply text-2xl; 
+      @apply font-semibold;
+      @apply pt-2;
+      border-bottom: 1px solid #eee;
+    }
+
+    h2 {
+      @apply text-xl;
+      @apply font-semibold;
+      @apply pt-2;
+    }
+
+    h3 {
+      @apply text-lg;
+      @apply pt-2;
+    }
+
+    li {
+      @apply py-2;
+    }
+
+  }
 
   .changelogs {
     border-top: 1px solid #eeeeee;

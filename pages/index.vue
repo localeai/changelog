@@ -28,9 +28,9 @@ export default {
   },
   async asyncData ({ $content }) {
     const releases = await $content('releases').fetch()
-
+    const filteredReleases = releases && releases.filter(release => release.published) || []
     return {
-      releases
+      releases: filteredReleases  
     }
   }
 };
