@@ -14,8 +14,8 @@
         >
       </div>
       <nuxt-content :document="release" />
-      <div class="changelogs flex flex-col mt-4 pb-4">
-        <h3 class="text-lg my-4">Major Changes</h3>
+      <div v-if="release.changes && release.changes.length > 0" class="changelogs flex flex-col mt-4 pb-4">
+        <h3 class="text-lg my-4">Other Changes</h3>
         <div
           v-for="(change, change_index) in release.changes"
           :key="`change_${change_index}`"
@@ -116,14 +116,14 @@ export default {
     h1 {
       @apply text-2xl; 
       @apply font-semibold;
-      @apply pt-2;
+      @apply py-2;
       border-bottom: 1px solid #eee;
     }
 
     h2 {
       @apply text-xl;
       @apply font-semibold;
-      @apply pt-2;
+      @apply py-2;
     }
 
     h3 {
@@ -133,6 +133,19 @@ export default {
 
     li {
       @apply py-2;
+    }
+
+    img {
+      @apply py-4;
+    }
+
+    blockquote {
+      @apply bg-gray-100;
+      @apply p-3;
+      @apply rounded;
+      @apply my-2;
+      @apply text-gray-700;
+      border-left: 3px solid #c0c0c0;
     }
 
   }
