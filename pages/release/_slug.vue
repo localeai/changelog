@@ -12,7 +12,7 @@
       </div>
       <nuxt-content :document="release" />
       <div v-if="release.changes && release.changes.length > 0" class="changelogs flex flex-col mt-4 pb-4">
-        <h3 class="text-lg my-4">Other Changes</h3>
+        <h3 class="text-lg my-4">Other Changes 🛠</h3>
         <div
           v-for="(change, change_index) in release.changes"
           :key="`change_${change_index}`"
@@ -38,6 +38,21 @@
           </div>
         </div>
       </div>
+      <div v-if="release.makers && release.makers.length > 0" class="changelogs flex flex-col mt-4 pb-4">
+        <h3 class="text-lg my-4">Engineers Worked on this Release 👷‍♂️</h3>
+        <div class="flex flex-row">
+
+        <div
+          v-for="(maker, maker_index) in release.makers"
+          :key="`change_${maker_index}`"
+          class="makers flex flex-col m-2"
+        >
+          <a :href="`https://github.com/${maker.github}`" rel="noopener noreferrer" target="_blank">
+          <img class="avatar rounded-full" :src="`https://github.com/${maker.github}.png`"/>
+          </a>
+        </div>
+        </div>
+      </div>
   </div>
 </div>
 </template>
@@ -46,6 +61,9 @@
 import Button from "~/components/shared/Button";
 import NavigationBar from "~/components/NavigationBar.vue";
 import ChangeLogs from "~/components/ChangeLogs.vue";
+import MIcon from "~/components/shared/m-icon";
+
+
 const tags = {
   FEATURE: "feature",
   BUG_FIX: "fix",
@@ -57,7 +75,8 @@ export default {
   components: {
     Button,
     NavigationBar,
-    ChangeLogs
+    ChangeLogs,
+    MIcon
   },
   data() {
     return {
@@ -98,8 +117,6 @@ export default {
   },
   async asyncData ({ $content, params }) {
     const release = await $content('releases', params.slug).fetch()
-    console.log({ release })
-    // const filteredReleases = releases && releases.filter(release => release.published) || []
     return {
       release  
     }
@@ -125,14 +142,16 @@ export default {
     h1 {
       @apply text-2xl; 
       @apply font-semibold;
-      @apply py-2;
+      @apply pb-2;
+      @apply pt-4;
       border-bottom: 1px solid #eee;
     }
 
     h2 {
       @apply text-xl;
       @apply font-semibold;
-      @apply py-2;
+      @apply pb-2;
+      @apply pt-4;
     }
 
     h3 {
@@ -161,7 +180,7 @@ export default {
 
   .changelogs {
     border-top: 1px solid #eeeeee;
-    border-bottom: 1px solid #eeeeee;
+    // border-bottom: 1px solid #eeeeee;
 
     .log {
       display: grid;
@@ -192,6 +211,13 @@ export default {
           }
         }
       }
+    }
+  }
+
+  .makers {
+    .avatar {
+      width: 60px;
+      height: 60px;
     }
   }
 }

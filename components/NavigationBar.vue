@@ -2,7 +2,7 @@
   <div class="container mx-auto flex items-center p-4">
     <div class="flex flex-row flex-grow items-center">
       <a href="https://locale.ai"><img :src="require(`~/assets/logo-text.svg`)" class="header-logo" /></a>
-      <span class="text-lg text-gray-400">Changelog 🚀 </span>
+      <nuxt-link to="/" class="text-lg text-gray-400">Changelog 🚀 </nuxt-link>
     </div>
     <div class="flex flex-row items-center hidden md:flex">
       <a class="py-2 px-3 text-secondary" href="https://blog.locale.ai">Blog</a>
