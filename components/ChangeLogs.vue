@@ -5,42 +5,22 @@
       :key="index"
       class="flex flex-col mb-4"
     >
-      <div class="flex flex-col my-4">
-        <h3 class="text-gray-600">{{ release.releaseDate }}</h3>
-        <h2 class="py-2 text-2xl">{{ release.title }}</h2>
-        <span class="flex flex-row items-center text-blue-500"
-          ><m-icon size="18" class="mr-2">label</m-icon
-          >{{ release.version }}</span
-        >
-      </div>
-      <nuxt-content :document="release" />
-      <div class="changelogs flex flex-col mt-4 pb-4">
-        <h3 class="text-lg my-4">Major Changes</h3>
-        <div
-          v-for="(change, change_index) in release.changes"
-          :key="`change_${change_index}`"
-          class="log"
-        >
-          <div class="flex flex-row">
-            <div
-              class="chit text-white self-start text-sm font-semibold p-1 rounded"
-              :style="{
-                backgroundColor: getTagDetails(change.tag).color
-              }"
-            >
-              {{ getTagDetails(change.tag).name }}
-            </div>
-          </div>
-          <div class="flex flex-col">
-            <h4 class="text-lg mb-2">
-              {{ change.title }}
-            </h4>
-            <p class="text-base text-gray-600">
-              {{ change.description }}
-            </p>
-          </div>
+      <nuxt-link
+        :to="`/release/${release.slug}`"
+        class="release-item flex flex-row items-center my-4 pb-2 border-b"
+      >
+        <div class="flex flex-col flex-grow">
+          <h3 class="text-gray-600">{{ release.releaseDate }}</h3>
+          <h2 class="title py-2 text-2xl">{{ release.title }}</h2>
+          <span class="flex flex-row items-center text-blue-500"
+            ><m-icon size="18" class="mr-2">label</m-icon
+            >{{ release.version }}</span
+          >
         </div>
-      </div>
+        <div class="hidden md:flex">
+          <m-icon>keyboard_arrow_right</m-icon>
+        </div>
+      </nuxt-link>
     </div>
   </div>
 </template>
@@ -108,67 +88,10 @@ export default {
   margin: 0 auto;
   padding: 20px 15px;
 
-  .nuxt-content {
-    a {
-      @apply text-blue-500;
-    }
-
-    h1 {
-      @apply text-2xl; 
-      @apply font-semibold;
-      @apply pt-2;
-      border-bottom: 1px solid #eee;
-    }
-
-    h2 {
-      @apply text-xl;
-      @apply font-semibold;
-      @apply pt-2;
-    }
-
-    h3 {
-      @apply text-lg;
-      @apply pt-2;
-    }
-
-    li {
-      @apply py-2;
-    }
-
-  }
-
-  .changelogs {
-    border-top: 1px solid #eeeeee;
-    border-bottom: 1px solid #eeeeee;
-
-    .log {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      @apply my-2;
-      @include respond-below(sm) {
-        grid-template-columns: 1fr;
-        .chit {
-          margin-bottom: 10px;
-
-          &.blue {
-            @apply bg-blue-500;
-          }
-          &.purple {
-            @apply bg-purple-500;
-          }
-
-          &.green {
-            @apply bg-green-500;
-          }
-
-          &.gray {
-            @apply bg-gray-500;
-          }
-
-          &.yellow {
-            @apply bg-yellow-500;
-          }
-        }
+  .release-item {
+    &:hover {
+      .title {
+        @apply text-blue-500;
       }
     }
   }

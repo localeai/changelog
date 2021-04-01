@@ -21,11 +21,6 @@ export default {
   },
   computed: {},
   methods: {},
-  mounted() {
-    if (this.releases) {
-      console.log({ releases: this.releases })
-    }
-  },
   async asyncData ({ $content }) {
     const releases = await $content('releases').fetch()
     const filteredReleases = releases && releases.filter(release => release.published) || []
