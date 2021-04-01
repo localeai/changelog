@@ -40,12 +40,12 @@
       </div>
       <div v-if="release.makers && release.makers.length > 0" class="changelogs flex flex-col mt-4 pb-4">
         <h3 class="text-lg my-4">Engineers Worked on this Release 👷‍♂️</h3>
-        <div class="flex flex-row">
+        <div class="makers flex flex-row">
 
         <div
           v-for="(maker, maker_index) in release.makers"
           :key="`change_${maker_index}`"
-          class="makers flex flex-col m-2"
+          class="flex flex-col m-2"
         >
           <a :href="`https://github.com/${maker.github}`" rel="noopener noreferrer" target="_blank">
           <img class="avatar rounded-full" :src="`https://github.com/${maker.github}.png`"/>
@@ -215,6 +215,7 @@ export default {
   }
 
   .makers {
+    flex-wrap: wrap;
     .avatar {
       width: 60px;
       height: 60px;
